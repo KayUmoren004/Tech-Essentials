@@ -44,18 +44,7 @@ const Facebook = () => (
     
 )
 
-const Button = () => (
-    <View style={{justifyContent: "center", alignItems:"center", marginTop: 15, flexDirection:"row"}}>
-        <Text>
-            Don't have an account?{" "}
-        </Text>
-        <TouchableOpacity onPress={() => alert("Sign Up")}>
-            <Text style={{textAlign:"center", fontWeight:"bold", color:"blue"}}>
-                Sign Up here!
-            </Text>
-            </TouchableOpacity>
-    </View>
-)
+
 
 const SocialIcon = ({children}: socialIconProps) => {
     return (
@@ -89,7 +78,7 @@ const insets = useSafeAreaInsets();
           <Facebook />
         </SocialIcon>
       </View>
-      <Button />
+      
     </View>
   );
 };

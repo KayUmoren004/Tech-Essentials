@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Formik } from "formik";
 
 import Container from "../Components/Container";
-import SocialLogin from "../Components/SocialLogin";
 import TextInput from "../Components/Forms/TextInput";
 import Checkbox from "../Components/Forms/Checkbox";
 
 import * as Yup from "yup";
+import Footer from "../Components/Footer";
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -17,37 +17,35 @@ const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
-/*const emailValidator = (email: string) =>
-  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-    email
-  );*/
-
-//const passwordValidator = (password: string) => password.length >= 6;
-
-const LogInScreen = () => {
+const LogInScreen = ({ navigation }: { navigation: any }) => {
   const footer = (
-    <>
-      <SocialLogin />
-    </>
+    <Footer
+      title="Don't have an account?"
+      action="Sign Up here!"
+      onPress={() => navigation.navigate("SignUp")}
+    />
   );
+  const password = useRef<typeof TextInput>(null);
+
   return (
     <Container {...{ footer }}>
       <View style={{ padding: 35 }}>
         <Text
           style={{
-            color: "#fff",
+            color: "#121212",
             textAlign: "center",
             fontWeight: "bold",
             fontSize: 30,
-            marginBottom: 25,
+            //marginBottom: 25,
           }}
         >
           Welcome back
         </Text>
         <Text
           style={{
+            marginTop: 25,
             marginBottom: 25,
-            color: "#fff",
+            color: "#121212",
             justifyContent: "center",
             textAlign: "center",
             fontWeight: "200",
@@ -61,7 +59,15 @@ const LogInScreen = () => {
           onSubmit={(values) => console.log(values)}
           validationSchema={LoginSchema}
         >
-          {({ handleChange, handleBlur, handleSubmit, errors, touched, values, setFieldValue, }) => (
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            errors,
+            touched,
+            values,
+            setFieldValue,
+          }) => (
             <View>
               <View style={{ marginBottom: 15 }}>
                 <TextInput
@@ -71,15 +77,27 @@ const LogInScreen = () => {
                   onBlur={handleBlur("email")}
                   error={errors.email}
                   touched={touched.email}
+                  autoCompleteType="email"
+                  autoCapitalize="none"
+                  returnKeyType="next"
+                  returnKeyLabel="next"
+                  onSubmitEditing={() => password.current?.focus()}
                 />
               </View>
               <TextInput
+                ref={password}
                 icon="lock"
                 placeholder="Enter your Password"
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
                 error={errors.password}
                 touched={touched.password}
+                autoCompleteType="password"
+                autoCapitalize="none"
+                secureTextEntry
+                returnKeyType="go"
+                returnKeyLabel="go"
+                onSubmitEditing={() => handleSubmit()}
               />
               <View
                 style={{
@@ -87,7 +105,11 @@ const LogInScreen = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <Checkbox label="Remember me" checked={values.remember} onChange={() => setFieldValue("remember", !values.remember)} />
+                <Checkbox
+                  label="Remember me"
+                  checked={values.remember}
+                  onChange={() => setFieldValue("remember", !values.remember)}
+                />
                 <View
                   style={{
                     height: 50,
@@ -96,7 +118,7 @@ const LogInScreen = () => {
                   }}
                 >
                   <TouchableOpacity onPress={() => true}>
-                    <Text style={{ color: "skyblue" }}>Forgot Password?</Text>
+                    <Text style={{ color: "blue" }}>Forgot Password?</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -106,13 +128,13 @@ const LogInScreen = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     borderRadius: 24,
-                    backgroundColor: "#f1ec60",
+                    backgroundColor: "#121212",
                     height: 48,
-                    marginHorizontal: 32,
-                    marginVertical: 0,
+                    //marginHorizontal: 32,
+                    //marginVertical: 0,
                   }}
                 >
-                  <Text style={{ color: "#000", textAlign: "center" }}>
+                  <Text style={{ color: "#f1ec60", textAlign: "center" }}>
                     Log into your account
                   </Text>
                 </View>
