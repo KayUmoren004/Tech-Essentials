@@ -2,33 +2,18 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInputProps as RNTextInputProps } from "react-native";
 import { TextInput as RNTextInput } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
+
 interface TextInputProps extends RNTextInputProps{
   //placeholder: string;
   icon: string;
-  validator: (input: string) => boolean;
+  touched? : boolean;
+  error?: string;
 }
 
-const Valid = true;
-const Invalid = false;
-const Pristine = null;
-type InputState = typeof Valid | typeof Invalid | typeof Pristine;
 
-const TextInput = ({ icon, validator, ...props }: TextInputProps) => {
-    const [input, setInput] = useState("")
-  const [state, setState] = useState<InputState>(Pristine);
-  const color =
-    state === Pristine ? "#8a8d90" : state === Valid ? "green" : "red";
-    const onChangeText = (text: string) => {
-        setInput(text);
-        if (state !== Pristine) 
-        {
-            validate()
-        }
-    }
-    const validate = () => {
-        const valid = validator(input);
-        setState(valid)
-    }
+
+const TextInput = ({ icon, touched, error, ...props }: TextInputProps) => {
+  const color = !touched ? "#fff" : error ? "red" : "#beecc4";
   return (
     <View
       style={{
@@ -47,15 +32,13 @@ const TextInput = ({ icon, validator, ...props }: TextInputProps) => {
      <RNTextInput
         underlineColorAndroid="transparent"
         placeholderTextColor="#d8d8d8"
-        onBlur = {validate}
-        {...{onChangeText}}
         {...props}
-        //style={{ color: "#fff" }}
+        style={{ color: "#fff" }}
       />
      </View>
-      {(state === Valid || state === Invalid) && (
-        <View style={{ borderRadius: 10, height: 20, width: 20, justifyContent:"center", alignItems:"center", backgroundColor:state === Valid ? "green" : "red", marginRight: 10}}>
-          <Icon name={state === Valid ? "check" : "x"} color="white" size={16} />
+      {touched && (
+        <View style={{ borderRadius: 10, height: 20, width: 20, justifyContent:"center", alignItems:"center", backgroundColor:!error ? "green" : "red", marginRight: 10}}>
+          <Icon name={!error ? "check" : "x"} color="white" size={16} />
         </View>
       )}
     </View>
