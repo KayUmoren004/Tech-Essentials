@@ -81,6 +81,8 @@ const LogInScreen = ({ navigation }: { navigation: any }) => {
                   autoCapitalize="none"
                   returnKeyType="next"
                   returnKeyLabel="next"
+                  keyboardAppearance="dark"
+                  keyboardType="email-address"
                   onSubmitEditing={() => password.current?.focus()}
                 />
               </View>
@@ -95,8 +97,9 @@ const LogInScreen = ({ navigation }: { navigation: any }) => {
                 autoCompleteType="password"
                 autoCapitalize="none"
                 secureTextEntry
-                returnKeyType="go"
-                returnKeyLabel="go"
+                returnKeyType="next"
+                returnKeyLabel="next"
+                keyboardAppearance="dark"
                 onSubmitEditing={() => handleSubmit()}
               />
               <View
@@ -117,12 +120,12 @@ const LogInScreen = ({ navigation }: { navigation: any }) => {
                     alignItems: "center",
                   }}
                 >
-                  <TouchableOpacity onPress={() => true}>
+                  <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
                     <Text style={{ color: "blue" }}>Forgot Password?</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-              <TouchableOpacity onPress={handleSubmit}>
+              <TouchableOpacity onPress={() => handleSubmit}>
                 <View
                   style={{
                     alignItems: "center",

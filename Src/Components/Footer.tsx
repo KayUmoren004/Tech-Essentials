@@ -23,7 +23,7 @@ const Footer = ({ onPress, title, action }: FooterProps) => {
         }}
       >
         <Text style={{ color: "#fff" }}>{`${title}`} </Text>
-        <TouchableWithoutFeedback {...{ onPress }}>
+        <TouchableOpacity {...{ onPress }}>
           <Text
             style={{
               textAlign: "center",
@@ -33,7 +33,7 @@ const Footer = ({ onPress, title, action }: FooterProps) => {
           >
             {action}
           </Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
     </>
   );

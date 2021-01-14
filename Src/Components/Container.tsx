@@ -13,7 +13,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 export const assets = [
   require("../Assets/tumblr_oiwyt1WJwH1tf8vylo1_1280.png"),
 ];
-const { width } = Dimensions.get("window");
+
+const {width, height: wheight} = Dimensions.get("window")
 const aspectRatio = 200 / 300;
 const height = width * aspectRatio;
 
@@ -26,31 +27,30 @@ const Container = ({ children, footer }: ContainerProps) => {
   const insets = useSafeAreaInsets();
 
   return (
+    <KeyboardAwareScrollView scrollEnabled={false}>
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <View style={{ backgroundColor: "#fff" }}>
         <View style={styles.ImageView}>
-          <Image
-            source={assets[0]}
-            style={{ width, height }}
-            borderTopLeftRadius={75}
-            resizeMode="cover"
+          <View
+            
+            style={{ width, height, borderTopLeftRadius: 75, backgroundColor:"#f1ec40" }}
           />
         </View>
       </View>
 
       <View style={styles.overlay}>
-        <Image
-          source={assets[0]}
+        <View
           style={{
             ...StyleSheet.absoluteFillObject,
             width,
             height,
             top: -height * 0.61,
+            backgroundColor:"#f1ec40"
           }}
         />
         <View style={styles.ContentContainer}>
-          <KeyboardAwareScrollView>{children}</KeyboardAwareScrollView>
+          {children}
         </View>
       </View>
       <View
@@ -63,6 +63,7 @@ const Container = ({ children, footer }: ContainerProps) => {
         {footer}
       </View>
     </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -70,8 +71,8 @@ export default Container;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#121212",
+    height: wheight
   },
   ImageView: {
     borderBottomLeftRadius: 75,
