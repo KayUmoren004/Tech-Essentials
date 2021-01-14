@@ -14,10 +14,7 @@ interface ForgotPasswordScreenProps {
 const sheight = 48
 
 const ForgotPasswordSchema = Yup.object().shape({
-    password: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Required"),
+   
     email: Yup.string().email("Invalid email").required("Required"),
   });
 
@@ -57,8 +54,8 @@ const ForgotPasswordScreen = ({navigation}: ForgotPasswordScreenProps) => {
           Enter the email address associated with your account
         </Text>
            <Formik
-          initialValues={{ email: "", password: "", remember: true }}
-          onSubmit={(values) => console.log(values)}
+          initialValues={{ email: "" }}
+          onSubmit={() => navigation.navigate("PasswordChanged")}
           validationSchema={ForgotPasswordSchema}
         >
           {({
@@ -86,11 +83,11 @@ const ForgotPasswordScreen = ({navigation}: ForgotPasswordScreenProps) => {
                   returnKeyLabel="done"
                   keyboardAppearance="dark"
                   keyboardType="email-address"
-                  onSubmitEditing={() => handleSubmit()}
+                  onSubmitEditing={handleSubmit}
                 />
               </View>
 
-              <TouchableOpacity onPress={() => handleSubmit} style={{justifyContent:"center", alignItems:"center"}}>
+              <TouchableOpacity onPress={() => handleSubmit()} style={{justifyContent:"center", alignItems:"center"}}>
                 <View
                   style={{
                     alignItems: "center",
@@ -100,8 +97,6 @@ const ForgotPasswordScreen = ({navigation}: ForgotPasswordScreenProps) => {
                     height: sheight,
                     width: "70%",
                     alignContent:"center"
-                    //marginHorizontal: 32,
-                    //marginVertical: 0,
                   }}
                 >
                   <Text style={{ color: "#f1ec60", textAlign: "center" }}>

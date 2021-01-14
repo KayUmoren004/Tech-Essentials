@@ -1,8 +1,8 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19000,
+  "expoServerPort": 19001,
+  "packagerPort": 19001,
   "expoServerNgrokUrl": "https://89-qwj.kayumoren.tech-essentials.exp.direct",
   "packagerNgrokUrl": "https://packager.89-qwj.kayumoren.tech-essentials.exp.direct",
-  "ngrokPid": 19584
+  "ngrokPid": 19808
 }

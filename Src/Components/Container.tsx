@@ -46,7 +46,7 @@ const Container = ({ children, footer }: ContainerProps) => {
             width,
             height,
             top: -height * 0.61,
-            backgroundColor:"#f1ec40"
+          backgroundColor:"#f1ec40",
           }}
         />
         <View style={styles.ContentContainer}>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     overflow: "hidden",
+    
   },
   ContentContainer: {
     flex: 1,
