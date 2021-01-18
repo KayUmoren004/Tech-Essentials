@@ -2,8 +2,8 @@ import { Linking } from 'expo';
 import { Formik } from 'formik';
 import React from 'react'
 import {  Text, TouchableOpacity, View } from 'react-native'
-import Container from '../Components/Container';
-import Footer from '../Components/Footer';
+import Container from '../Components/Views/Container';
+import Footer from '../Components/Views/Footer';
 import * as Yup from "yup";
 import TextInput from '../Components/Forms/TextInput';
 

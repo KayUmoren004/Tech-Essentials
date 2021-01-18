@@ -1,13 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Formik } from "formik";
 
-import Container from "../Components/Container";
+import Container from "../Components/Views/Container";
 import TextInput from "../Components/Forms/TextInput";
 import Checkbox from "../Components/Forms/Checkbox";
+import {FirebaseContext} from "../Components/Firebase/FirebaseContext"
+import {UserContext} from "../Components/Firebase/UserContext"
 
 import * as Yup from "yup";
-import Footer from "../Components/Footer";
+import Footer from "../Components/Views/Footer";
+
+
 
 const SignUpSchema = Yup.object().shape({
   password: Yup.string()
@@ -21,6 +25,27 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUpScreen = ({ navigation }: { navigation: any }) => {
+  const [userEmail, setUserEmail] = useState();
+  const [userPassword, setUserPassword] = useState();
+  const [loading, setLoading] = useState(false);
+  const firebase = useContext(FirebaseContext)
+  const [_, setUser] = useContext(UserContext)
+
+  const signUp = async () => {
+    setLoading(true);
+
+    const user = { userEmail, userPassword};
+
+    try {
+      const createdUser = await firebase.createUser(JSON.stringify(user))
+
+      setUser({...createdUser, isLoggedIn: true})
+    }catch (error) {
+      console.log("Error @signUp: ", error)
+    } finally {
+      setLoading(false)
+    }
+  }
   const footer = (
     <Footer
       title="Already have an account?"
@@ -61,7 +86,7 @@ const SignUpScreen = ({ navigation }: { navigation: any }) => {
         </Text>
         <Formik
           initialValues={{ email: "", password: "", passwordConfirmation: "" }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={() => signUp()}
           validationSchema={SignUpSchema}
         >
           {({

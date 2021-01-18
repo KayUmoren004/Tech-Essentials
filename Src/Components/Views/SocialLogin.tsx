@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
-
+import onPress from "../Firebase/GoogleSignIn"
 interface SocialLoginProps {
 
 }
 
-const Google = () => (
-    <TouchableOpacity onPress={() => alert("Sign Up")}>
+
+
+
+const SocialIcon = ({children}: socialIconProps) => {
+    return (
+        <View
+          style={{
+            backgroundColor: "#fff",
+            width: 25*2,
+            height: 25*2,
+            borderRadius: 25,
+            justifyContent: "center",
+            alignItems: "center",
+            marginHorizontal: 15
+          }}
+        >
+          {children}
+        </View>
+    )
+}
+
+const SocialLogin = ({}: SocialLoginProps) => {
+  const Google = () => (
+    <TouchableOpacity onPress={() => onPress}>
   <Svg width={20} height={20} viewBox="0 0 48 48">
     <Path
       fill="#EA4335"
@@ -32,7 +54,7 @@ const Google = () => (
 );
 
 const Facebook = () => (
-    <TouchableOpacity onPress={() => alert("Sign Up")}>
+    <TouchableOpacity onPress={() => true}>
     
         <Svg viewBox="0 0 50 50" width={20} height={20}>
         <Path
@@ -44,28 +66,11 @@ const Facebook = () => (
     
 )
 
-
-
-const SocialIcon = ({children}: socialIconProps) => {
-    return (
-        <View
-          style={{
-            backgroundColor: "#fff",
-            width: 25*2,
-            height: 25*2,
-            borderRadius: 25,
-            justifyContent: "center",
-            alignItems: "center",
-            marginHorizontal: 15
-          }}
-        >
-          {children}
-        </View>
-    )
-}
-
-const SocialLogin = ({}: SocialLoginProps) => {
 const insets = useSafeAreaInsets();
+
+const SignIn = async () => {
+
+}
 
   return (
     <View>

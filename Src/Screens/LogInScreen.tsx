@@ -2,12 +2,19 @@ import React, { useRef } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Formik } from "formik";
 
-import Container from "../Components/Container";
+import Container from "../Components/Views/Container";
 import TextInput from "../Components/Forms/TextInput";
 import Checkbox from "../Components/Forms/Checkbox";
 
 import * as Yup from "yup";
-import Footer from "../Components/Footer";
+import Footer from "../Components/Views/Footer";
+
+interface User {
+  email: string;
+  password: string;
+  loading: boolean;
+  
+}
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()

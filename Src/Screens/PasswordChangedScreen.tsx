@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
-import Container from "../Components/Container";
-import CloseButton from "../Components/CloseButton";
+import Container from "../Components/Views/Container";
+import CloseButton from "../Components/Views/CloseButton";
 import { Feather as Icon } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
@@ -58,7 +58,7 @@ const PasswordChangedScreen = ({ navigation }: PasswordChangedScreenProps) => {
             //marginBottom: 25,
           }}
         >
-          Forgot password?
+          Password Reset has been requested
         </Text>
         <Text
           style={{
@@ -71,7 +71,7 @@ const PasswordChangedScreen = ({ navigation }: PasswordChangedScreenProps) => {
             fontSize: 15,
           }}
         >
-          Enter the email address associated with your account
+          An email with a link will be sent to the email on your account
         </Text>
 
         <TouchableOpacity

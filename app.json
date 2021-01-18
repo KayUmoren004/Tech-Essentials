@@ -7,6 +7,20 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "com.kayumoren.techessentials",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.kayumoren.techessentials"
+        }
+      },
+      "googleServicesFile": "./GoogleService-Info.plist"
+    },
+    "android": {
+      "package": "com.kayumoren.techessentials",
+      "googleServicesFile": "./google-services.json"
+    }
   }
-}
+  }
+
